@@ -1,0 +1,6 @@
+@BackgroundQueueSetup_HostAddress = http://localhost:5027
+
+GET {{BackgroundQueueSetup_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
