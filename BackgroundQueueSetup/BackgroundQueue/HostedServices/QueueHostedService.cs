@@ -2,17 +2,11 @@
 
 namespace BackgroundQueueSetup.BackgroundQueue.HostedServices;
 
-public class QueuedHostedService<T> : BackgroundService
+public class QueuedHostedService<T>(
+    IBackgroundTaskQueue<T> _queue,
+    IServiceScopeFactory _scopeFactory
+    ) : BackgroundService
 {
-    private readonly IBackgroundTaskQueue<T> _queue;
-    private readonly IServiceScopeFactory _scopeFactory;
-    public QueuedHostedService(IBackgroundTaskQueue<T> queue,
-        IServiceScopeFactory scopeFactory)
-    {
-        _queue = queue;
-        _scopeFactory = scopeFactory;
-    }
-
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)

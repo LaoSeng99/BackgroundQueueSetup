@@ -4,10 +4,11 @@ using BackgroundQueueSetup.Services;
 
 namespace BackgroundQueueSetup.BackgroundQueue.Handlers;
 
-public class AuditLogHandler : IWorkerHandler<AuditLogEntry>
+public class AuditLogHandler(
+    IAuditLogService _svc
+    ) : IWorkerHandler<AuditLogEntry>
 {
-    private readonly IAuditLogService _svc;
-    public AuditLogHandler(IAuditLogService svc) => _svc = svc;
+
 
     public Task HandleAsync(AuditLogEntry entry, CancellationToken ct)
     {
